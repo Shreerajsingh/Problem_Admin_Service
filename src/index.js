@@ -6,7 +6,7 @@ const {PORT} = require('./config/server.config')
 const app = express();
 
 app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({extended: true}));
+app.use(bodyparser.urlencoded({extended: true}));   // @ 
 app.use(bodyparser.text());
 
 app.get('/ping', (req,res) => {
@@ -15,4 +15,4 @@ app.get('/ping', (req,res) => {
 
 app.listen(PORT, () => {
     console.log(`server started at port: ${PORT}`);
-});
+}); 
