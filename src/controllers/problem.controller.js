@@ -23,7 +23,7 @@ function deleteProblem(req, res) {
 }
 
 
-module.exports = {
+module.exports = { 
     addProblem,
     getProblem,
     getProblems,

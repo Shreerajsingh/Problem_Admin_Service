@@ -4,6 +4,7 @@ const {ProblemController} = require('../../controllers/index.js');
 
 const problemRouter = express.Router();
 
+// If any req comes and continues with /api, we map it to ProblemController
 problemRouter.get('/ping', ProblemController.pingProblemController);
 
 problemRouter.get('/:id', ProblemController.getProblem);
