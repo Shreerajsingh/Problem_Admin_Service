@@ -1,37 +1,54 @@
 const { StatusCodes } = require('http-status-codes');
+const NotImplemented = require('../Errors/notimplemented.error');
+const BadRequest = require('../Errors/badrequest.error');
 
-function pingProblemController(req, res) {
+function pingProblemController(req, res, next) {
     return res.json({message : 'Problem controller is up :)'});
 }
 
-function addProblem(req, res) {
-    return res.status(StatusCodes.NOT_IMPLEMENTED).json({
-        message: 'Node Implemented'
-    });
+function addProblem(req, res, next) {
+    try {
+        // Nothing Implemented yet
+        throw new NotImplemented("Add Problem");
+    } catch (error) { 
+        next(error);
+    }
+} 
+
+function getProblem(req, res, next) {
+    try {
+        // Nothing Implemented yet
+        throw new NotImplemented("Get Problem");
+    } catch (error) { 
+        next(error);
+    }
 }
 
-function getProblem(req, res) {
-    return res.status(StatusCodes.NOT_IMPLEMENTED).json({
-        message: 'Node Implemented'
-    });
+function getProblems(req, res, next) {
+    try {
+        // Nothing Implemented yet
+        throw new NotImplemented("Get Problems");
+    } catch (error) { 
+        next(error);
+    }
 }
 
-function getProblems(req, res) {
-    return res.status(StatusCodes.NOT_IMPLEMENTED).json({
-        message: 'Node Implemented'
-    });
+function updateProblem(req, res, next) {
+    try {
+        // Nothing Implemented yet
+        throw new NotImplemented("Update Problem");
+    } catch (error) { 
+        next(error);
+    }
 }
 
-function updateProblem(req, res) {
-    return res.status(StatusCodes.NOT_IMPLEMENTED).json({
-        message: 'Node Implemented'
-    });
-}
-
-function deleteProblem(req, res) {
-    return res.status(StatusCodes.NOT_IMPLEMENTED).json({
-        message: 'Node Implemented'
-    });
+function deleteProblem(req, res, next) {
+    try {
+        // Nothing Implemented yet
+        throw new NotImplemented("Delete Problem");
+    } catch (error) { 
+        next(error);
+    }
 }
 
 
