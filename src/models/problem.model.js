@@ -3,16 +3,16 @@ const mongoose = require('mongoose');
 const problemSchema = new mongoose.Schema({
     title: {
         type: String,
-        requires: [true, 'Title can\'t be empty']
+        required: [true, 'Title can\'t be empty']
     },
     description: {
         type: String,
-        requires: [true, 'Description can\'t be empty']
+        required: [true, 'Description can\'t be empty']
     },
     difficulty: {
         type: String,
         enum: ['easy', 'medium', 'hard'],
-        requires: [true, 'Difficulty can\'t be empty'],
+        required: [true, 'Difficulty can\'t be empty'],
         level: 'easy'
     },
     testCases: [
@@ -22,7 +22,7 @@ const problemSchema = new mongoose.Schema({
                 required: true
             },
             output: {
-                typr: String,
+                type: String,
                 required: true
             }
         }
@@ -36,3 +36,5 @@ const problemSchema = new mongoose.Schema({
 const Problem = mongoose.model('Problem', problemSchema);
 
 module.exports = Problem;
+
+// Here we r creating mongoose schema model
