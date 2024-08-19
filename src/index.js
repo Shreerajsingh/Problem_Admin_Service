@@ -4,9 +4,10 @@ const bodyparser = require('body-parser');
 const {PORT} = require('./config/server.config')
 
 const apiRouter = require('./routes/index.js');
-const BaseError = require('./Errors/base.error.js');
-const NotFoundError = require('./Errors/NotFoundError.js');
 const errorHandler = require('./utils/errorHandler.js');
+const connectToDB = require('./config/db.config');
+const mongoose = require('mongoose');
+// const NotFoundError = require('./Errors/NotFoundError.js');
 
 const app = express();
 
@@ -24,18 +25,10 @@ app.get('/ping', (req,res) => {
 // Last MiddleWare if any error comes
 app.use(errorHandler);
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`server started at port: ${PORT}`);
-
-    // throw new BaseError("new Error", 404, "Som.. went wrong", {});
-
-    // try{ 
-    //     throw new BaseError("Some error", 404, {errorMessage: "Oops!!!"});
-    // } catch(error) {
-    //     console.log("Somthing went wrong |", error.name);
-    // } finally {
-    //     console.log("xyz server colsed.");
-    // }
+    await connectToDB();
+    console.log("Successfully connected");
  
     // try{
     //     throw new NotFoundError({});
