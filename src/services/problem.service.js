@@ -8,7 +8,7 @@ class ProblemService {
 
     async createProblem(problemData) {
         try {
-            throw {"errror" : "Some error"};
+            // throw {"errror" : "Some error"};
             problemData.description = sanitizeMarksownContent(problemData.description);
 
             const problem = await this.problemRepository.createProblem(problemData);
@@ -18,6 +18,12 @@ class ProblemService {
             console.log(error);
             throw error;
         }
+    }
+
+    async getAllProblems() {
+        const problems = await this.problemRepository.getAllProblems();
+
+        return problems;
     }
 }
 

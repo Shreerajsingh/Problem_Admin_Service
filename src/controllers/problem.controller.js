@@ -19,7 +19,7 @@ async function addProblem(req, res, next) {
             message: 'Successfully created a new problem',
             error: {},
             data: newProblem
-        })
+        });
         
         // // Nothing Implemented yet
         // throw new NotImplemented("Add Problem");
@@ -37,10 +37,17 @@ function getProblem(req, res, next) {
     }
 }
 
-function getProblems(req, res, next) {
+async function getProblems(req, res, next) {
     try {
-        // Nothing Implemented yet
-        throw new NotImplemented("Get Problems");
+        const response = await problemService.getAllProblems();
+
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: 'Successfully fetched all the problems',
+            error: {},
+            data: response
+        });
+        
     } catch (error) { 
         next(error);
     }
