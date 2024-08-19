@@ -1,5 +1,5 @@
 const {StatusCodes} = require('http-status-codes');
-const NotImplemented = require('../Errors/notimplemented.error');
+const { badrequest, internalServer, notFound, notImplemented } = require('../Errors/index');
 const {ProblemService} = require('../services');
 const {ProblemRepository} = require('../repositories');
 
@@ -28,10 +28,20 @@ async function addProblem(req, res, next) {
     }
 } 
 
-function getProblem(req, res, next) {
+async function getProblem(req, res, next) {
     try {
-        // Nothing Implemented yet
-        throw new NotImplemented("Get Problem");
+        const response = await problemService.getProblem(req.params.id);
+
+        if(!response) {
+            throw new notFound(`Problem not found with id: ${req.params.id}`);
+        }
+
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: 'Successfully fetched the problem',
+            error: {},
+            data: response
+        });
     } catch (error) { 
         next(error);
     }
@@ -56,7 +66,7 @@ async function getProblems(req, res, next) {
 function updateProblem(req, res, next) {
     try {
         // Nothing Implemented yet
-        throw new NotImplemented("Update Problem");
+        throw new notImplemented("Update Problem");
     } catch (error) { 
         next(error);
     }
@@ -65,7 +75,7 @@ function updateProblem(req, res, next) {
 function deleteProblem(req, res, next) {
     try {
         // Nothing Implemented yet
-        throw new NotImplemented("Delete Problem");
+        throw new notImplemented("Delete Problem");
     } catch (error) { 
         next(error);
     }
