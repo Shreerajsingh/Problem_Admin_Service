@@ -2,6 +2,7 @@ const {StatusCodes} = require('http-status-codes');
 const { badrequest, internalServer, notFound, notImplemented } = require('../Errors/index');
 const {ProblemService} = require('../services');
 const {ProblemRepository} = require('../repositories');
+const { response } = require('express');
 
 const problemService = new ProblemService(new ProblemRepository);
 
@@ -63,19 +64,36 @@ async function getProblems(req, res, next) {
     }
 }
 
-function updateProblem(req, res, next) {
+async function updateProblem(req, res, next) {
+    const response = await problemService.updateProblem(req.params.id, req.body);
+    if(!response) {
+        return new notFound(`No problem exist with id ${req.params.id}`);
+    } 
     try {
-        // Nothing Implemented yet
-        throw new notImplemented("Update Problem");
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: 'Successfully updated the problems',
+            error: {},
+            data: req.params.id
+        });
     } catch (error) { 
         next(error);
     }
 }
 
-function deleteProblem(req, res, next) {
+async function deleteProblem(req, res, next) {
     try {
-        // Nothing Implemented yet
-        throw new notImplemented("Delete Problem");
+        const response = await problemService.deleteProblem(req.params.id);
+        if(!response) {
+            throw new notFound(`No problem exist with id ${req.params.id}`);
+        }
+
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: 'Successfully deleted the problems',
+            error: {},
+            data: req.params.id
+        });
     } catch (error) { 
         next(error);
     }
