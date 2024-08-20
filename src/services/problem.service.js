@@ -31,6 +31,22 @@ class ProblemService {
 
         return problems;
     }
+
+    async deleteProblem(id) {
+        const response = await this.problemRepository.deleteProblem(id);
+
+        return response;
+    }
+
+    async updateProblem(id, data) {
+        if ('description' in data) {
+            data.description = sanitizeMarksownContent(data.description);
+        }
+
+        const response = await this.problemRepository.updateProblem(id, data);
+
+        return response;
+    }
 }
 
 module.exports = ProblemService;
