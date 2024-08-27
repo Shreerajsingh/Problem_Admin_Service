@@ -2,7 +2,7 @@ const {StatusCodes} = require('http-status-codes');
 const { badrequest, internalServer, notFound, notImplemented } = require('../Errors/index');
 const {ProblemService} = require('../services');
 const {ProblemRepository} = require('../repositories');
-const { response } = require('express');
+const logger = require('../config/logger.config');
 
 const problemService = new ProblemService(new ProblemRepository);
 
@@ -85,6 +85,7 @@ async function deleteProblem(req, res, next) {
     try {
         const response = await problemService.deleteProblem(req.params.id);
         if(!response) {
+            logger.error(`Problem with id: ${req.params.id} not found in the db`);
             throw new notFound(`No problem exist with id ${req.params.id}`);
         }
 
