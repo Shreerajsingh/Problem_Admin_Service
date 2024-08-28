@@ -12,6 +12,10 @@ allowedTransports.push(new winston.transports.MongoDB({
     collection: 'logs'
 }));
 
+allowedTransports.push(new winston.transports.File({
+    filename: 'app.log'
+}))
+
 const logger = winston.createLogger({
     format: winston.format.combine(
         winston.format.timestamp({
