@@ -8,6 +8,7 @@ class ProblemRepository {
                 description: problemData.description,
                 difficulty: problemData.difficulty,
                 testCases: (problemData.testCases) ? problemData.testCases : [],
+                codeStubs: (problemData.codeStubs) ? problemData.codeStubs : [],
                 editorial: (problemData.editorial) ? problemData.editorial : {},
             })
 

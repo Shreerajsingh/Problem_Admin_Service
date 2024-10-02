@@ -1,5 +1,5 @@
 const winston = require('winston');
-const {LOG_DB_URL} = require('./server.config');
+const {ATLAS_DB_URL} = require('./server.config');
 require('winston-mongodb');
 
 const allowedTransports = [];
@@ -8,7 +8,7 @@ allowedTransports.push(new winston.transports.Console());
 
 allowedTransports.push(new winston.transports.MongoDB({
     level: 'error',
-    db: LOG_DB_URL,
+    db: ATLAS_DB_URL,
     collection: 'logs'
 }));
 
